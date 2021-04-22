@@ -6,7 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.nikol412.artroom.R
+import com.nikol412.artroom.data.ArtAPI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OverviewFragment : Fragment() {
 
@@ -19,9 +25,15 @@ class OverviewFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_overview, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
+        lifecycleScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                ArtAPI.getApi().getArtworks(129884)
+            }
+
+            view.findViewById<TextView>(R.id.text_view_data)?.text = result.data.title
+        }
     }
 
 }
