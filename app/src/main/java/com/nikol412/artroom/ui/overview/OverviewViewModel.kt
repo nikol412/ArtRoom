@@ -1,4 +1,4 @@
-package com.nikol412.artroom.ui
+package com.nikol412.artroom.ui.overview
 
 import androidx.lifecycle.ViewModel
 
