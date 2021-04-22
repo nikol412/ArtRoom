@@ -12,31 +12,31 @@ data class ArtworkResponse(
 )
 data class ArtWorkData(
     @SerializedName("api_link")
-    val apiLink: String,
+    val apiLink: String?,
 
     @SerializedName("artist_ids")
-    val artistIds: List<Int>,
+    val artistIds: List<Int>?,
 
     @SerializedName("artist_title")
-    val artistTitle: String,
+    val artistTitle: String?,
 
     @SerializedName("date_display")
-    val dateDisplay: String,
+    val dateDisplay: String?,
 
     @SerializedName("dimensions")
-    val dimensions: String,
+    val dimensions: String?,
 
     @SerializedName("id")
     val id: Int,
 
     @SerializedName("image_id")
-    val imageId: String,
+    val imageId: String?,
 
     @SerializedName("title")
-    val title: String
+    val title: String?
 )
 
 data class ImageConfig(
     @SerializedName("iiif_url")
-    val imageUrl: String
+    val imageUrl: String?
 )
