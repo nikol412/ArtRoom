@@ -36,7 +36,7 @@ class ArtworkViewHolder(private val binding: ItemArtworksRowBinding) :
     fun onBind(item: ArtworkObject) {
         binding.textViewData.text = item.title
 
-        val url = "${item.imageConfig}/${item.imageId}/full/843,/0/default.jpg"
+        val url = "${item.imageConfig}/${item.imageId}/full/600,/0/default.jpg"
         GlideApp.with(binding.root.context)
             .load(url)
             .into(binding.imageArtwork)
