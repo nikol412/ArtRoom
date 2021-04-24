@@ -40,7 +40,7 @@ class OverviewFragment : Fragment() {
             val artworksPage = withContext(Dispatchers.IO) {
                 ArtAPI.getApi().getArtsPage(1)
             }
-            adapter.setItems(artworksPage.toArtworkObjectList())
+            adapter.setItems(artworksPage.toArtworkObjectList().filter { it.imageId.isNullOrBlank().not() })
         }
 
 
