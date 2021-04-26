@@ -16,12 +16,14 @@ import com.nikol412.artroom.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        setContentView(R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
         val navController = (supportFragmentManager.findFragmentById(R.id.main_container_view) as NavHostFragment).navController
+        val drawerLayout = binding.drawerLayout
+        val appBarConf = AppBarConfiguration(navController.graph, drawerLayout)
+        binding.toolbar.setupWithNavController(navController, appBarConf)
+        binding.navView.setupWithNavController(navController)
 
-        val appBarConf = AppBarConfiguration(navController.graph)
-        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController, appBarConf)
     }
 }
