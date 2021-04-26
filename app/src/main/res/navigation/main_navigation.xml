@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.nikol412.artroom.ui.Search"
+        android:name="com.nikol412.artroom.ui.search.Search"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 
