@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.nikol412.artroom.data.response.ArtWorkData
 import com.nikol412.artroom.data.response.ArtworkResponse
 import com.nikol412.artroom.data.response.ArtworksListResponse
+import com.nikol412.artroom.data.response.SearchResponse
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,6 +21,23 @@ object ArtAPI {
             .baseUrl("https://api.artic.edu/api/v1/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .client(getOkhttpClient())
+            .build()
+            .create(API::class.java)
+    }
+
+    fun getSearchApi(): API {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl("https://api.artic.edu/api/v1/")
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .client(client)
             .build()
             .create(API::class.java)
     }
@@ -62,4 +80,7 @@ interface API {
 
     @GET("artworks")
     suspend fun getArtsPage(@Query("page") page: Int): ArtworksListResponse
+
+    @GET("artworks/search")
+    suspend fun searchArtwork(@Query("q") query: String, @Query("limit") limit: Int = 20): SearchResponse
 }
